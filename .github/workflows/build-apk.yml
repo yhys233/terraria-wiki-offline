@@ -1,6 +1,5 @@
 name: Build Android APK
 
-# 定义触发方式：手动触发 + 推送到main分支时触发
 on:
   push:
     branches: [ main ]
@@ -34,5 +33,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: terraria-wiki-apk
-          path: Terraria_Wiki/publish/*.apk
           path: Terraria_Wiki/publish/*.apk
