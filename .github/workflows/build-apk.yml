@@ -1,6 +1,9 @@
 name: Build Android APK
 
+# 定义触发方式：手动触发 + 推送到main分支时触发
 on:
+  push:
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -14,21 +17,20 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-      - name: Install MAUI
-        run: |
-          dotnet workload install maui-android
+      - name: Install MAUI Android Workload
+        run: dotnet workload install maui-android
 
-      - name: Restore
+      - name: Restore Dependencies
         run: |
           cd Terraria_Wiki
           dotnet restore
 
-      - name: Build and Publish
+      - name: Build and Publish APK
         run: |
           cd Terraria_Wiki
           dotnet publish -f net8.0-android -c Release -o publish
 
-      - name: Upload APK
+      - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: terraria-wiki-apk
